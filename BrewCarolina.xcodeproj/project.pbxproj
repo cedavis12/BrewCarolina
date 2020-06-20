@@ -77,6 +77,7 @@
 				838EFC86249E6B2400845A04 /* Assets.xcassets */,
 				838EFC88249E6B2400845A04 /* LaunchScreen.storyboard */,
 				838EFC8B249E6B2400845A04 /* Info.plist */,
+				8372C37C249E814200AF92D3 /* Extensions */,
 				838EFCB0249E6FD600845A04 /* Model */,
 				838EFCB1249E6FE900845A04 /* View */,
 				838EFCAF249E6FC600845A04 /* Controller */,
@@ -91,7 +92,6 @@
 				838EFCB5249E71D000845A04 /* SearchViewController.swift */,
 				838EFCB7249E71DD00845A04 /* ListViewController.swift */,
 				838EFCB9249E71E800845A04 /* FavoritesViewController.swift */,
-				8372C37C249E814200AF92D3 /* Extensions */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
