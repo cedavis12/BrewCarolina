@@ -1,5 +1,5 @@
 //
-//  NearbyBrewViewController.swift
+//  ViewController.swift
 //  BrewCarolina
 //
 //  Created by Courtney Davis on 6/20/20.
@@ -8,10 +8,13 @@
 
 import UIKit
 
-class NearbyBrewViewController: UIViewController {
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavBar(withTitle: "Nearby Brew")
+        // Do any additional setup after loading the view.
     }
+
+
 }
+

@@ -6,4 +6,14 @@
 //  Copyright © 2020 Courtney Davis. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIViewController {
+    
+    func configureNavBar(withTitle title: String) {
+        view.backgroundColor = .systemBackground
+        self.title = title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemOrange]
+    }
+}

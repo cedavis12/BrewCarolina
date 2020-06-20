@@ -12,19 +12,34 @@ class BCTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        UITabBar.appearance().tintColor = .systemOrange
+        viewControllers = [createNearbyBrewNC(), createSearchVC(), createListVC(), createFavoritesVC()]
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func createNearbyBrewNC() -> UINavigationController {
+        let nearbyBrewVC = NearbyBrewViewController()
+        nearbyBrewVC.tabBarItem = UITabBarItem(title: "Nearby", image: UIImage(systemName: "location"), tag: 0)
+        return UINavigationController(rootViewController: nearbyBrewVC)
     }
-    */
+    
+    func createSearchVC() -> UINavigationController {
+        let searchVC = SearchViewController()
+        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
+        return UINavigationController(rootViewController: searchVC)
+    }
+
+    
+    func createListVC() -> UINavigationController {
+        let listVC = ListViewController()
+        listVC.tabBarItem = UITabBarItem(title: "List", image: UIImage(systemName: "list.dash"), tag: 2)
+        return UINavigationController(rootViewController: listVC)
+    }
+
+    
+    func createFavoritesVC() -> UINavigationController {
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 3)
+        return UINavigationController(rootViewController: favoritesVC)
+    }
 
 }
