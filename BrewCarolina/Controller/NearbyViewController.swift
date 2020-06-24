@@ -8,10 +8,10 @@
 
 import UIKit
 
-class NearbyBrewViewController: UIViewController {
+class NearbyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavBar(withTitle: "Nearby Brew")
+        self.configureNavBar(withTitle: "Nearby")
     }
 }
