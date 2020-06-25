@@ -410,7 +410,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BrewCarolina;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -428,7 +428,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BrewCarolina;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
