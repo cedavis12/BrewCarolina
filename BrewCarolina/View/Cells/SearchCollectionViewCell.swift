@@ -25,11 +25,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(brewery: Brewery){
-        breweryTitleLabel.text = brewery.name
-        breweryTypeLabel.text = brewery.breweryType
-        breweryLocationLabel.text = "\(brewery.city), \(brewery.state)"
-    }
 
     
     private func configure(){

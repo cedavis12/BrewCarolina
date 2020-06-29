@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,7 +25,11 @@
 		839A444E24A190E0008849F7 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A444D24A190E0008849F7 /* UIHelper.swift */; };
 		83B96710249FF704007416B1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9670F249FF704007416B1 /* MapViewController.swift */; };
 		83B96712249FF735007416B1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B96711249FF735007416B1 /* ProfileViewController.swift */; };
+		83BE2D2C24A82DB400AD8769 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BE2D2B24A82DB400AD8769 /* Venue.swift */; };
 		83E5CE7024A2D6D100FDC127 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */; };
+		83EBEB1B24A824CC00552CAC /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EBEB1A24A824CC00552CAC /* Beer.swift */; };
+		83EBEB1E24A825BF00552CAC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 83EBEB1D24A825BF00552CAC /* Alamofire */; };
+		83EBEB2124A825DB00552CAC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 83EBEB2024A825DB00552CAC /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +41,7 @@
 		832F2E3C24A18A690027792D /* BCCalloutLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCCalloutLabel.swift; sourceTree = "<group>"; };
 		8342A1CD249FFB8E0027FB53 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		8372C37D249E818500AF92D3 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
-		838EFC7A249E6B1E00845A04 /* BrewCarolina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrewCarolina.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		838EFC7A249E6B1E00845A04 /* Brew Carolina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brew Carolina.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838EFC7D249E6B1E00845A04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838EFC7F249E6B1E00845A04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		838EFC86249E6B2400845A04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +53,9 @@
 		839A444D24A190E0008849F7 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		83B9670F249FF704007416B1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		83B96711249FF735007416B1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		83BE2D2B24A82DB400AD8769 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		83EBEB1A24A824CC00552CAC /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EBEB2124A825DB00552CAC /* SwiftyJSON in Frameworks */,
+				83EBEB1E24A825BF00552CAC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +118,7 @@
 		838EFC7B249E6B1E00845A04 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				838EFC7A249E6B1E00845A04 /* BrewCarolina.app */,
+				838EFC7A249E6B1E00845A04 /* Brew Carolina.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				832F2E2F24A180D40027792D /* Brewery.swift */,
+				83EBEB1A24A824CC00552CAC /* Beer.swift */,
+				83BE2D2B24A82DB400AD8769 /* Venue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,8 +204,12 @@
 			dependencies = (
 			);
 			name = BrewCarolina;
+			packageProductDependencies = (
+				83EBEB1D24A825BF00552CAC /* Alamofire */,
+				83EBEB2024A825DB00552CAC /* SwiftyJSON */,
+			);
 			productName = BrewCarolina;
-			productReference = 838EFC7A249E6B1E00845A04 /* BrewCarolina.app */;
+			productReference = 838EFC7A249E6B1E00845A04 /* Brew Carolina.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -222,6 +236,10 @@
 				Base,
 			);
 			mainGroup = 838EFC71249E6B1E00845A04;
+			packageReferences = (
+				83EBEB1C24A825BF00552CAC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				83EBEB1F24A825DB00552CAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 838EFC7B249E6B1E00845A04 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -252,7 +270,9 @@
 				838EFCB3249E713B00845A04 /* BCTabBarController.swift in Sources */,
 				832F2E3D24A18A690027792D /* BCCalloutLabel.swift in Sources */,
 				83E5CE7024A2D6D100FDC127 /* String+Ext.swift in Sources */,
+				83BE2D2C24A82DB400AD8769 /* Venue.swift in Sources */,
 				832F2E3524A187E30027792D /* SearchCollectionViewCell.swift in Sources */,
+				83EBEB1B24A824CC00552CAC /* Beer.swift in Sources */,
 				83B96712249FF735007416B1 /* ProfileViewController.swift in Sources */,
 				838EFCAE249E6FC100845A04 /* NearbyViewController.swift in Sources */,
 				832F2E3324A183010027792D /* NetworkManager.swift in Sources */,
@@ -410,7 +430,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = BrewCarolina;
+				PRODUCT_NAME = "Brew Carolina";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -428,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = BrewCarolina;
+				PRODUCT_NAME = "Brew Carolina";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -456,6 +476,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		83EBEB1C24A825BF00552CAC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.1;
+			};
+		};
+		83EBEB1F24A825DB00552CAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		83EBEB1D24A825BF00552CAC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83EBEB1C24A825BF00552CAC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		83EBEB2024A825DB00552CAC /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83EBEB1F24A825DB00552CAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 838EFC72249E6B1E00845A04 /* Project object */;
 }

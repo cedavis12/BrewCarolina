@@ -5,14 +5,13 @@
 //  Created by Courtney Davis on 6/20/20.
 //  Copyright © 2020 Courtney Davis. All rights reserved.
 //
-
 import UIKit
 
 class SearchViewController: UIViewController{
     
     enum Section { case main }
     
-    var breweries: [Brewery] = []
+    var venues: [Venue] = []
     var page: Int = 1
     
     var collectionView: UICollectionView!
@@ -21,10 +20,9 @@ class SearchViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavBar(withTitle: "Search")
+        getVenues()
         configureCollectionView()
         configureSearchController()
-        getBreweries()
-        
     }
     
     func configureSearchController() {
@@ -43,18 +41,30 @@ class SearchViewController: UIViewController{
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.reuseID)
     }
-        
-    func getBreweries() {
-          NetworkManager.shared.getBreweries(page: 1) { [weak self] (breweries, errorMessage) in
-              guard let self = self else { return }
-              guard let breweries = breweries else {
-                  print(errorMessage ?? "error")
-                  return
-              }
-              
-              self.breweries.append(contentsOf: breweries)
-          }
-      }
+    
+    func getVenues() {
+        NetworkManager.shared.getFSVenues { [weak self] (venues, errorMessage) in
+            guard let self = self else { return }
+            
+            guard let venues = venues else {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Something went wrong", message: errorMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                return
+            }
+            
+            self.venues.append(contentsOf: venues)
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.view.bringSubviewToFront(self.collectionView)
+            }
+            
+        }
+    }
 }
 
 // MARK: UISearchResultsUpdater
@@ -71,17 +81,17 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Breweries count \(self.breweries.count)")
-        return self.breweries.count
+        print("Venues count \(self.venues.count)")
+        return self.venues.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.reuseID, for: indexPath) as! SearchCollectionViewCell
-        let brewery = self.breweries[indexPath.row]
-//        cell.backgroundColor = .systemGray5
+        let brewery = self.venues[indexPath.row]
+        cell.backgroundColor = .systemGray5
         cell.breweryTitleLabel.text = brewery.name
-        cell.breweryTypeLabel.text = "Brewery Type: \(brewery.breweryType.capitalizingFirstLetter())"
-        cell.breweryLocationLabel.text = "\(brewery.city), SC"
+        cell.breweryTypeLabel.text = brewery.id
+        cell.breweryLocationLabel.text = "\(brewery.city), \(brewery.state)"
         cell.backgroundColor = .secondarySystemBackground
         cell.layer.cornerRadius = 8
         return cell
@@ -94,3 +104,4 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 //extension SearchViewController: UICollectionViewDelegate {
 //
 //}
+
