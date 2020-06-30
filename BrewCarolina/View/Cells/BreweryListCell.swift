@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
+class BreweryListCell: UICollectionViewCell {
     
     static let reuseID = "SearchCell"
     
     let breweryTitleLabel = BCHeadlineLabel()
-    let breweryTypeLabel = BCCalloutLabel()
+    let breweryDistanceLabel = BCCalloutLabel()
     let breweryLocationLabel = BCCalloutLabel()
     
     override init(frame: CGRect) {
@@ -25,10 +25,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
     private func configure(){
-        addSubviews(breweryTitleLabel, breweryTypeLabel, breweryLocationLabel)
+        addSubviews(breweryTitleLabel, breweryDistanceLabel, breweryLocationLabel)
         
         NSLayoutConstraint.activate([
             breweryTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
@@ -36,11 +34,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
             breweryTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             breweryTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            breweryTypeLabel.topAnchor.constraint(equalTo: breweryTitleLabel.bottomAnchor, constant: 12),
-            breweryTypeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            breweryTypeLabel.heightAnchor.constraint(equalToConstant: 18),
+            breweryDistanceLabel.topAnchor.constraint(equalTo: breweryTitleLabel.bottomAnchor, constant: 12),
+            breweryDistanceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            breweryDistanceLabel.heightAnchor.constraint(equalToConstant: 18),
             
-            breweryLocationLabel.topAnchor.constraint(equalTo: breweryTypeLabel.bottomAnchor, constant: 12),
+            breweryLocationLabel.topAnchor.constraint(equalTo: breweryDistanceLabel.bottomAnchor, constant: 12),
             breweryLocationLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             breweryLocationLabel.heightAnchor.constraint(equalToConstant: 18)
         ])

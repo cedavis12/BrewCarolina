@@ -12,10 +12,7 @@ class SearchViewController: UIViewController{
     enum Section { case main }
     
     var venues: [Venue] = []
-    var page: Int = 1
-    
     var collectionView: UICollectionView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +36,7 @@ class SearchViewController: UIViewController{
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.reuseID)
+        collectionView.register(BreweryListCell.self, forCellWithReuseIdentifier: BreweryListCell.reuseID)
     }
     
     func getVenues() {
@@ -62,7 +59,6 @@ class SearchViewController: UIViewController{
                 self.collectionView.reloadData()
                 self.view.bringSubviewToFront(self.collectionView)
             }
-            
         }
     }
 }
@@ -86,11 +82,11 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.reuseID, for: indexPath) as! SearchCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreweryListCell.reuseID, for: indexPath) as! BreweryListCell
         let brewery = self.venues[indexPath.row]
         cell.backgroundColor = .systemGray5
         cell.breweryTitleLabel.text = brewery.name
-        cell.breweryTypeLabel.text = brewery.id
+        cell.breweryDistanceLabel.text = brewery.id
         cell.breweryLocationLabel.text = "\(brewery.city), \(brewery.state)"
         cell.backgroundColor = .secondarySystemBackground
         cell.layer.cornerRadius = 8

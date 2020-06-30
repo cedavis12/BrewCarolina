@@ -13,7 +13,7 @@ class BCTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor = .systemOrange
-        viewControllers = [createNearbyBrewNC(), createMapNC(), createSearchVC(), createProfileVC()]
+        viewControllers = [createNearbyBrewNC(), createMapNC(), createSearchVC()]
     }
     
     func createNearbyBrewNC() -> UINavigationController {
@@ -33,11 +33,4 @@ class BCTabBarController: UITabBarController {
         searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         return UINavigationController(rootViewController: searchVC)
     }
-    
-    func createProfileVC() -> UINavigationController {
-        let profileVC = ProfileViewController()
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 3)
-        return UINavigationController(rootViewController: profileVC)
-    }
-
 }
