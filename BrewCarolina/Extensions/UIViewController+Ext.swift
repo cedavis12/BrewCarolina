@@ -16,4 +16,20 @@ extension UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemOrange]
     }
+    
+    func configureNavBar(withLongTitle title: String) {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemOrange]
+        self.title = title
+        for navItem in (self.navigationController?.navigationBar.subviews)! {
+            for itemSubView in navItem.subviews {
+                if let largeLabel = itemSubView as? UILabel {
+                    largeLabel.text = self.title
+                    largeLabel.numberOfLines = 0
+                    largeLabel.lineBreakMode = .byWordWrapping
+                }
+            }
+        }
+    }
 }

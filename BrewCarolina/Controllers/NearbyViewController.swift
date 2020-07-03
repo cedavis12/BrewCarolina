@@ -13,7 +13,7 @@ class NearbyViewController: UIViewController {
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()
     
-    var venues: [Venue] = []
+    var venues: [Venues] = []
     var distance: Int = 25
     let items = ["25 miles", "50 miles", "100 miles"]
     
@@ -29,24 +29,24 @@ class NearbyViewController: UIViewController {
     }
     
     func getVenues() {
-        NetworkManager.shared.getFSVenues { [weak self] (venues, errorMessage) in
+        NetworkManager.shared.getFSVenues { [weak self] (result) in
             guard let self = self else { return }
             
-            guard let venues = venues else {
+            switch result {
+            case .success(let venues):
+                self.venues.append(contentsOf: venues)
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Something went wrong", message: errorMessage, preferredStyle: .alert)
+                    self.collectionView.reloadData()
+                    self.view.bringSubviewToFront(self.collectionView)
+                }
+            case .failure(let errorMessage):
+               DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Something went wrong", message: errorMessage.rawValue, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                         NSLog("The \"OK\" alert occured.")
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }
-                return
-            }
-            
-            self.venues.append(contentsOf: venues)
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.view.bringSubviewToFront(self.collectionView)
             }
         }
     }
@@ -108,7 +108,7 @@ class NearbyViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 25),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 550)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding)
         ])
     }
     
@@ -149,7 +149,7 @@ extension NearbyViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.backgroundColor = .systemGray5
         cell.breweryTitleLabel.text = brewery.name
         cell.breweryDistanceLabel.text = "25 miles"
-        cell.breweryLocationLabel.text = "\(brewery.city), \(brewery.state)"
+        cell.breweryLocationLabel.text = "\(brewery.location.city ?? ""), \(brewery.location.state ?? "")"
         cell.backgroundColor = .secondarySystemBackground
         cell.layer.cornerRadius = 8
         return cell

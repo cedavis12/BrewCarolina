@@ -15,73 +15,123 @@ class NetworkManager {
     
     private init(){}
     
-    //    func getVenues(completion: @escaping ([Venue]?) -> Void){
-    //        let url = "https://api.foursquare.com/v2/venues/search?client_id=PUJYEAXQRVUNZ1210S15NHQPWTMMFMJ2QNX2ZB3YNPDN3QJY&client_secret=5PUJ5TKNLTHULNUX1NVKUIITVSKXMFLFQFW3DN3AKIHMSMJO&categoryId=50327c8591d4c4b30a586d5d&near=Greenville,SC&radius=56400&limit=50&v=20180323"
-    //        var venues: [Venue] = []
-    //
-    //        AF.request(url, method: .get).validate().responseJSON { response in
-    //            switch response.result {
-    //            case .success(let data):
-    //                let json = JSON(data)
-    //                let venueNum = json["response"]["venues"].count
-    //
-    //                for i in 0..<venueNum {
-    //                    let venue = Venue(id: json["response", "venues", i, "id"].stringValue,
-    //                                      name: json["response", "venues", i, "name"].stringValue,
-    //                                      latitude: json["response", "venues", i, "location", "lat"].doubleValue,
-    //                                      longitude: json["response","venues", i, "location", "lng"].doubleValue,
-    //                                      city: json["response", "venues", i, "location", "city"].stringValue,
-    //                                      state: json["response", "venues", i, "location", "state"].stringValue)
-    //
-    //                    venues.append(venue)
-    //                }
-    //
-    //                venues = venues.filter {$0.state == "SC"}
-    //                completion(venues)
-    //
-    //            case .failure(let error):
-    //                print(error)
-    //                completion(nil)
-    //            }
-    //        }
-    //    }
-    
-    func getFSVenues (completed: @escaping ([Venue]?, String?) -> Void) {
+    //Get all venues from FourSquare that are a 35 mile radius around Greenville
+    func getFSVenues (completed: @escaping (Result<[Venues], ErrorMessage>) -> Void) {
         let urlString = "https://api.foursquare.com/v2/venues/search?client_id=PUJYEAXQRVUNZ1210S15NHQPWTMMFMJ2QNX2ZB3YNPDN3QJY&client_secret=5PUJ5TKNLTHULNUX1NVKUIITVSKXMFLFQFW3DN3AKIHMSMJO&categoryId=50327c8591d4c4b30a586d5d&near=Greenville,SC&radius=56400&limit=50&v=20180323"
         
         guard let url = URL(string: urlString) else {
-            completed(nil, "Invalid request to the server.\n Please try again.")
+            completed(.failure(.badRequest))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let _ = error {
-                completed(nil, "Unable to complete request.\n Please try again.")
+                completed(.failure(.unableToComplete))
                 return
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completed(nil, "Invalid response from server.\n Please try again.")
+                completed(.failure(.invalidResponse))
                 return
             }
             
             guard let data = data else {
-                completed(nil, "Invalid response from server.\n Please try again.")
+                completed(.failure(.invalidResponse))
                 return
             }
             
-            let json = JSON(data)
+            do {
+                let decoder = JSONDecoder()
+                let fsMain = try decoder.decode(FSMain.self, from: data)
+                var venues = fsMain.response.venues
+                venues = venues.filter {$0.location.state == "SC" && $0.id != "4f50b109e4b0e4085209b8a3"}
+                completed(.success(venues))
+            }
+            catch {
+                print(error)
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    //Get the Untappd Id mapped from the FourSquare venue
+    func getUTID(for venueID: String, completed: @escaping(Result<Int, ErrorMessage>) -> Void) {
+        let urlString = "https://api.untappd.com/v4/venue/foursquare_lookup/\(venueID)?client_id=1A455B54ABF71244759C309CC915D8C34E9695AF&client_secret=3FC6D22517EABB2D18EBF707E4E3E1C8F8CE3EFD"
+        
+        guard let url = URL(string: urlString) else {
+            completed(.failure(.badRequest))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
             
-            var venues = json["response"]["venues"].arrayValue.map { Venue(id: $0["id"].stringValue,
-                                                                           name: $0["name"].stringValue,
-                                                                           latitude: $0["location"]["lat"].doubleValue,
-                                                                           longitude: $0["location"]["lng"].doubleValue,
-                                                                           city: $0["location"]["city"].stringValue,
-                                                                           state: $0["location"]["state"].stringValue)}
-                        
-            venues = venues.filter {$0.state == "SC"}
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
             
-            completed(venues, nil)
+            guard let data = data else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let fsLookupMain = try decoder.decode(FSLookupMain.self, from: data)
+                let breweryId = fsLookupMain.response.venue.items[0].venueId
+                completed(.success(breweryId))
+            }
+            catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    //Get all details from a selected Brewery
+    func getBreweryData(for breweryId: Int, completed: @escaping(Result<Brewery, ErrorMessage>) -> Void) {
+        let urlString = "https://api.untappd.com/v4/venue/info/\(breweryId)?client_id=1A455B54ABF71244759C309CC915D8C34E9695AF&client_secret=3FC6D22517EABB2D18EBF707E4E3E1C8F8CE3EFD"
+        
+        guard let url = URL(string: urlString) else {
+            completed(.failure(.badRequest))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let fsBreweryMain = try decoder.decode(FSBreweryMain.self, from: data)
+                let brewery = fsBreweryMain.response.venue
+                completed(.success(brewery))
+            }
+            catch {
+                completed(.failure(.invalidData))
+            }
         }
         
         task.resume()
