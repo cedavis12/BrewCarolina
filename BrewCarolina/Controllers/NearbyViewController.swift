@@ -72,7 +72,6 @@ class NearbyViewController: UIViewController {
     
     func configureUI() {
         configureSegmentedControl()
-//        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         titleLabel.text = "Breweries \(distance) miles near"
         titleLabel.textColor = .secondaryLabel
@@ -139,14 +138,12 @@ extension NearbyViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Venues count \(self.venues.count)")
         return self.venues.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreweryListCell.reuseID, for: indexPath) as! BreweryListCell
         let brewery = self.venues[indexPath.row]
-        cell.backgroundColor = .systemGray5
         cell.breweryTitleLabel.text = brewery.name
         cell.breweryDistanceLabel.text = "25 miles"
         cell.breweryLocationLabel.text = "\(brewery.location.city ?? ""), \(brewery.location.state ?? "")"

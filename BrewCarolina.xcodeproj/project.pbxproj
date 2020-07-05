@@ -29,6 +29,8 @@
 		838EFCB3249E713B00845A04 /* BCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB2249E713B00845A04 /* BCTabBarController.swift */; };
 		838EFCB6249E71D000845A04 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB5249E71D000845A04 /* SearchViewController.swift */; };
 		839A444E24A190E0008849F7 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A444D24A190E0008849F7 /* UIHelper.swift */; };
+		83ABF75124B004D300DC2DD5 /* BCImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABF75024B004D300DC2DD5 /* BCImageView.swift */; };
+		83ABF75324B1650200DC2DD5 /* BeerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */; };
 		83B96710249FF704007416B1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9670F249FF704007416B1 /* MapViewController.swift */; };
 		83E5CE7024A2D6D100FDC127 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		838EFCB2249E713B00845A04 /* BCTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCTabBarController.swift; sourceTree = "<group>"; };
 		838EFCB5249E71D000845A04 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		839A444D24A190E0008849F7 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		83ABF75024B004D300DC2DD5 /* BCImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCImageView.swift; sourceTree = "<group>"; };
+		83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailViewController.swift; sourceTree = "<group>"; };
 		83B9670F249FF704007416B1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +110,7 @@
 			children = (
 				83460FAD24AD003600C26D52 /* BeerHeaderInfoVC.swift */,
 				83460FB224AD03F000C26D52 /* BreweryHeaderInfoViewController.swift */,
+				83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 		838EFCB1249E6FE900845A04 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				83ABF74F24B004B600DC2DD5 /* ImageViews */,
 				83460FB124AD02CA00C26D52 /* ViewControllers */,
 				832F2E3924A1896F0027792D /* Labels */,
 				838EFCB4249E714000845A04 /* TabBarController */,
@@ -199,6 +205,14 @@
 				83460FB424AD071100C26D52 /* Constants.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		83ABF74F24B004B600DC2DD5 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				83ABF75024B004D300DC2DD5 /* BCImageView.swift */,
+			);
+			path = ImageViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,10 +292,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				838EFCB6249E71D000845A04 /* SearchViewController.swift in Sources */,
+				83ABF75324B1650200DC2DD5 /* BeerDetailViewController.swift in Sources */,
 				838EFCB3249E713B00845A04 /* BCTabBarController.swift in Sources */,
 				832F2E3D24A18A690027792D /* BCCalloutLabel.swift in Sources */,
 				83E5CE7024A2D6D100FDC127 /* String+Ext.swift in Sources */,
 				837612D824AEB94A00CCE47D /* BCTitle3Label.swift in Sources */,
+				83ABF75124B004D300DC2DD5 /* BCImageView.swift in Sources */,
 				83460FB324AD03F000C26D52 /* BreweryHeaderInfoViewController.swift in Sources */,
 				83460FAC24ACFB2B00C26D52 /* BeerListCell.swift in Sources */,
 				83460FB524AD071100C26D52 /* Constants.swift in Sources */,

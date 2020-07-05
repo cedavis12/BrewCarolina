@@ -9,11 +9,10 @@
 import UIKit
 
 class BreweryHeaderInfoViewController: UIViewController {
-
+    
     let breweryTitleLabel = BCTitleLabel()
-    let breweryImage = UIImageView()
+    let breweryImage = BCImageView(frame: .zero)
     let locationLabel = BCTitle3Label()
-    let distanceLabel = BCTitle3Label()
     
     var brewery: Brewery!
     var distance: Int!
@@ -27,58 +26,46 @@ class BreweryHeaderInfoViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews(breweryTitleLabel, breweryImage,  locationLabel,  distanceLabel )
+        view.addSubviews(breweryTitleLabel, breweryImage,  locationLabel )
         configureUIElements()
         layoutUI()
     }
     
     func configureUIElements() {
-        breweryImage.image = Images.placeholder
-        breweryImage.contentMode = .scaleAspectFit
-        breweryImage.layer.cornerRadius = 12
+        breweryImage.downloadImage(fromURL: brewery.venueIcon.md)
         
         breweryTitleLabel.text = brewery.venueName
         breweryTitleLabel.numberOfLines = 0
-
+        
         locationLabel.text = "\(brewery.location.venueAddress) \n \(brewery.location.venueCity), \(brewery.location.venueState)"
         locationLabel.numberOfLines = 0
-        
-        guard let distance = distance else { return }
-        distanceLabel.text = "\(distance) miles"
-        
     }
     
     func layoutUI() {
-        breweryImage.translatesAutoresizingMaskIntoConstraints = false
-
-        let padding: CGFloat = 10
+        
+        let padding: CGFloat = 8
         let imagePadding: CGFloat = 8
         
         NSLayoutConstraint.activate([
             
-            breweryImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-            breweryImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            breweryImage.heightAnchor.constraint(equalToConstant: 200),
-            breweryImage.widthAnchor.constraint(equalToConstant: 190),
+            breweryImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            breweryImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            breweryImage.heightAnchor.constraint(equalToConstant: 100),
+            breweryImage.widthAnchor.constraint(equalToConstant: 100),
             
-            breweryTitleLabel.topAnchor.constraint(equalTo: breweryImage.topAnchor),
-            breweryTitleLabel.leadingAnchor.constraint(equalTo: breweryImage.trailingAnchor),
+            breweryTitleLabel.centerYAnchor.constraint(equalTo: breweryImage.centerYAnchor, constant: -15),
+            breweryTitleLabel.leadingAnchor.constraint(equalTo: breweryImage.trailingAnchor, constant: 5),
             breweryTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            breweryTitleLabel.heightAnchor.constraint(equalToConstant: 100),
+            breweryTitleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 100),
             
             locationLabel.topAnchor.constraint(equalTo: breweryTitleLabel.bottomAnchor, constant: padding),
             locationLabel.leadingAnchor.constraint(equalTo: breweryImage.trailingAnchor, constant: imagePadding),
             locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             locationLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            distanceLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: padding),
-            distanceLabel.leadingAnchor.constraint(equalTo: breweryImage.trailingAnchor, constant: imagePadding),
-            distanceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            distanceLabel.heightAnchor.constraint(equalToConstant: 25),
-
         ])
     }
 }

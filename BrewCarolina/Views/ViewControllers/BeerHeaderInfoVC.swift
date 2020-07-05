@@ -8,14 +8,29 @@
 
 import UIKit
 
-class BeerHeaderInfoVIew: UIView {
+class BeerInfoView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    
+    var beer: BeerItems!
+    var index: Int!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
     }
-    */
-
+    
+    convenience init(beer: BeerItems) {
+        self.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+//       self.addSubviews(beerImage, beerTitleLabel, breweryTitleLabel, beerStyleLabel, abvTitleLabel, ibuTitleLabel, accent, beerDescription)
+        
+        print("Beers from the beerinfoview \(beer)")
+    }
 }

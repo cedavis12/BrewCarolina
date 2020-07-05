@@ -13,8 +13,12 @@ class BreweryDetailViewController: UIViewController {
     var breweryName: String!
     var FSID: String!
     var breweryId: Int!
+    var beers: [BeerItems] = []
     
     var breweryHeaderVC: BreweryHeaderInfoViewController!
+    var collectionView: UICollectionView!
+    let topBeerTitleLabel = BCTitleLabel()
+    let accent = UIView()
     
     init(breweryName: String, FSID: String) {
         super.init(nibName: nil, bundle: nil)
@@ -31,8 +35,8 @@ class BreweryDetailViewController: UIViewController {
         super.viewDidLoad()
         self.configureNavBar(withTitle: "Brewery Details")
         fetchBreweryId()
+        configureCollectionView()
     }
-    
     
     func fetchBreweryId() {
         NetworkManager.shared.getUTID(for: FSID) { [weak self] (result) in
@@ -61,8 +65,11 @@ class BreweryDetailViewController: UIViewController {
             
             switch result {
             case .success(let brewery):
+                self.beers.append(contentsOf: brewery.topBeers.items)
                 DispatchQueue.main.async {
                     self.configureUIElements(with: brewery)
+                    self.collectionView.reloadData()
+                    self.view.bringSubviewToFront(self.collectionView)
                 }
                 
             case .failure(let errorMessage):
@@ -78,15 +85,30 @@ class BreweryDetailViewController: UIViewController {
         }
     }
     
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createSingleColumnLayout(in: view))
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(BeerListCell.self, forCellWithReuseIdentifier: BeerListCell.reuseID)
+    }
+    
     func configureUIElements(with brewery: Brewery) {
         breweryHeaderVC = BreweryHeaderInfoViewController(brewery: brewery, distance: 25)
         addChild(breweryHeaderVC)
-        view.addSubview(breweryHeaderVC.view)
+        view.addSubviews(breweryHeaderVC.view, accent, topBeerTitleLabel)
         breweryHeaderVC.didMove(toParent: self)
-        constrainBreweryHeaderVC()
+        
+        configureUI()
     }
     
-    func constrainBreweryHeaderVC() {
+    func configureUI() {
+        topBeerTitleLabel.text = "Top Beers"
+        accent.translatesAutoresizingMaskIntoConstraints = false
+        accent.backgroundColor = .systemOrange
+        
         breweryHeaderVC.view.translatesAutoresizingMaskIntoConstraints = false
         let padding: CGFloat = 5
         
@@ -94,8 +116,64 @@ class BreweryDetailViewController: UIViewController {
             breweryHeaderVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             breweryHeaderVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             breweryHeaderVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            breweryHeaderVC.view.heightAnchor.constraint(equalToConstant: 200)
+            breweryHeaderVC.view.heightAnchor.constraint(lessThanOrEqualToConstant: 200),
+            
+            topBeerTitleLabel.topAnchor.constraint(equalTo: breweryHeaderVC.view.bottomAnchor, constant: 5),
+            topBeerTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topBeerTitleLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            accent.topAnchor.constraint(equalTo: topBeerTitleLabel.bottomAnchor, constant: 5),
+            accent.leadingAnchor.constraint(equalTo: topBeerTitleLabel.leadingAnchor),
+            accent.trailingAnchor.constraint(equalTo: topBeerTitleLabel.trailingAnchor),
+            accent.heightAnchor.constraint(equalToConstant: 5),
+            
+            collectionView.topAnchor.constraint(equalTo: accent.bottomAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
             
         ])
     }
+}
+
+// MARK: CollectionViewDelegate
+
+extension BreweryDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.beers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BeerListCell.reuseID, for: indexPath) as! BeerListCell
+        let beer = self.beers[indexPath.row]
+        
+        
+        cell.backgroundColor = .secondarySystemBackground
+        cell.layer.cornerRadius = 8
+        cell.beerImage.downloadImage(fromURL: beer.beer.beerLabel)
+        cell.beerTitleLabel.text = beer.beer.beerName
+        cell.beerTypeLabel.text = beer.beer.beerStyle
+        
+        if beer.beer.beerAbv > 0.0 {
+            cell.beerABVLabel.text = "ABV: \(String(beer.beer.beerAbv))"
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let beer = self.beers[indexPath.row]
+        
+        let destVC = BeerDetailViewController(beer: beer, brewery: breweryName)
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+    }
+
+    
+    
+    
 }

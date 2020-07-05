@@ -12,12 +12,11 @@ class BeerListCell: UICollectionViewCell {
     
     static let reuseID = "BeerCell"
     
-    let beerImage = UIImageView()
+    let beerImage = BCImageView(frame: .zero)
     let beerTitleLabel = BCHeadlineLabel()
     let beerTypeLabel = BCCalloutLabel()
     let beerABVLabel = BCCalloutLabel()
-    let ratingLabel = BCCalloutLabel()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -28,22 +27,25 @@ class BeerListCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubviews(beerImage, beerTitleLabel, beerTypeLabel, beerABVLabel, ratingLabel)
+        addSubviews(beerImage, beerTitleLabel, beerTypeLabel, beerABVLabel)
         
-        let padding: CGFloat = 10
-        let imagePadding: CGFloat = 15
+        beerTitleLabel.numberOfLines = 0
         
+        let padding: CGFloat = 8
+        let imagePadding: CGFloat = 8
         
         NSLayoutConstraint.activate([
-            beerTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            beerTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            beerTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            beerImage.topAnchor.constraint(equalTo: beerTitleLabel.bottomAnchor, constant: padding),
-            beerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            beerImage.heightAnchor.constraint(equalToConstant: 45),
-            beerImage.widthAnchor.constraint(equalToConstant: 45),
+            beerImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            beerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            beerImage.heightAnchor.constraint(equalToConstant: 90),
+            beerImage.widthAnchor.constraint(equalToConstant: 90),
             
+            beerTitleLabel.centerYAnchor.constraint(equalTo: beerImage.centerYAnchor, constant: -20),
+            beerTitleLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
+            beerTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            beerTitleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 100),
+        
             beerTypeLabel.topAnchor.constraint(equalTo: beerTitleLabel.bottomAnchor, constant: padding),
             beerTypeLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
             beerTypeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
@@ -53,12 +55,7 @@ class BeerListCell: UICollectionViewCell {
             beerABVLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
             beerABVLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
             beerABVLabel.heightAnchor.constraint(equalToConstant: 18),
-            
-            ratingLabel.topAnchor.constraint(equalTo: beerABVLabel.bottomAnchor, constant: padding),
-            ratingLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
-            ratingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
-            ratingLabel.heightAnchor.constraint(equalToConstant: 18),
-            
+        
         ])
     }
 }

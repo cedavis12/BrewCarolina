@@ -106,15 +106,15 @@ struct BeerItems: Decodable {
 }
 
 struct Beer: Decodable {
-    var bid: Int?
-    var beerName: String?
-    var beerLabel: String?
-    var beerAbv: Double?
-    var beerIbu: Int?
-    var beerDescription: String?
-    var beerStyle: String?
-    var ratingScore: Double?
-    var ratingCount: Int?
+    var bid: Int
+    var beerName: String
+    var beerLabel: String
+    var beerAbv: Double
+    var beerIbu: Int
+    var beerDescription: String
+    var beerStyle: String
+    var ratingScore: Double
+    var ratingCount: Int
 }
 
 

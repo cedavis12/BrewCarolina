@@ -6,12 +6,13 @@
 //  Copyright © 2020 Courtney Davis. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyJSON
 
 class NetworkManager {
     
     static let shared = NetworkManager()
+    let cache = NSCache<NSString, UIImage>()
     
     private init(){}
     
@@ -44,7 +45,7 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 let fsMain = try decoder.decode(FSMain.self, from: data)
                 var venues = fsMain.response.venues
-                venues = venues.filter {$0.location.state == "SC" && $0.id != "4f50b109e4b0e4085209b8a3"}
+                venues = venues.filter {$0.location.state == "SC" && $0.id != "4f50b109e4b0e4085209b8a3" && $0.id != "4efbe97d30f8809e7616231d" && $0.id != "5c5f8960a30619002c33444d"}
                 completed(.success(venues))
             }
             catch {
@@ -134,6 +135,51 @@ class NetworkManager {
             }
         }
         
+        task.resume()
+    }
+    
+    
+    
+    func downloadImage(from urlString: String, completed: @escaping(UIImage?) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        
+        if let image = cache.object(forKey: cacheKey) {
+            completed(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            
+            guard let self = self else { return }
+            
+            if let _ = error {
+                completed(nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(nil)
+                return
+            }
+            
+            guard let data = data else {
+                completed(nil)
+                return
+            }
+            
+            guard let image = UIImage(data: data) else {
+                completed(nil)
+                return
+            }
+            
+            self.cache.setObject(image, forKey: cacheKey)
+            completed(image)
+        }
         task.resume()
     }
 }
