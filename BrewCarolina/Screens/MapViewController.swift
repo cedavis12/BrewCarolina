@@ -9,17 +9,19 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: DataLoadingViewController {
     
     var venues: [Venues] = []
     var filteredVenues: [Venues] = []
     var page: Int = 1
+    var breweryDetailVC: BreweryDetailViewController!
     
     let mapView = MKMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavBar(withTitle: "Map")
+        mapView.delegate = self
         configureMapView()
         getBreweries()
     }
@@ -38,8 +40,10 @@ class MapViewController: UIViewController {
     }
     
     func getBreweries() {
+        showLoadingView()
         NetworkManager.shared.getFSVenues { [weak self] (result) in
             guard let self = self else { return }
+            self.dismissLoadingView()
             
             switch result {
             case .success(let venues):
@@ -68,8 +72,24 @@ class MapViewController: UIViewController {
             
             annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             annotation.title = venue.name
+            annotation.subtitle = venue.id
             mapView.addAnnotation(annotation)
+            
         }
     }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard let breweryName = view.annotation?.title else { return }
+        guard let venueId = view.annotation?.subtitle else { return }
+        
+        let destVC = BreweryDetailViewController(breweryName: breweryName ?? "" , venueId: venueId ?? "")
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+
+    }
+    
 }
 

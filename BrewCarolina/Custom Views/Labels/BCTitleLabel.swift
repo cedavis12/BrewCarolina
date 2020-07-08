@@ -28,5 +28,6 @@ class BCTitleLabel: UILabel {
         minimumScaleFactor = 0.9
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
+        
     }
 }

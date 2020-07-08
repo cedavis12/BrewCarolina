@@ -8,10 +8,10 @@
 
 import UIKit
 
-class BreweryDetailViewController: UIViewController {
+class BreweryDetailViewController: DataLoadingViewController {
     
     var breweryName: String!
-    var FSID: String!
+    var venueId: String!
     var breweryId: Int!
     var beers: [BeerItems] = []
     
@@ -20,9 +20,9 @@ class BreweryDetailViewController: UIViewController {
     let topBeerTitleLabel = BCTitleLabel()
     let accent = UIView()
     
-    init(breweryName: String, FSID: String) {
+    init(breweryName: String, venueId: String) {
         super.init(nibName: nil, bundle: nil)
-        self.FSID = FSID
+        self.venueId = venueId
         self.breweryName = breweryName
     }
     
@@ -39,8 +39,10 @@ class BreweryDetailViewController: UIViewController {
     }
     
     func fetchBreweryId() {
-        NetworkManager.shared.getUTID(for: FSID) { [weak self] (result) in
+        showLoadingView()
+        NetworkManager.shared.getUTID(for: venueId) { [weak self] (result) in
             guard let self = self else { return }
+            self.dismissLoadingView()
             
             switch result {
             case .success(let breweryId):
@@ -66,6 +68,7 @@ class BreweryDetailViewController: UIViewController {
             switch result {
             case .success(let brewery):
                 self.beers.append(contentsOf: brewery.topBeers.items)
+                
                 DispatchQueue.main.async {
                     self.configureUIElements(with: brewery)
                     self.collectionView.reloadData()
@@ -99,13 +102,20 @@ class BreweryDetailViewController: UIViewController {
         breweryHeaderVC = BreweryHeaderInfoViewController(brewery: brewery, distance: 25)
         addChild(breweryHeaderVC)
         view.addSubviews(breweryHeaderVC.view, accent, topBeerTitleLabel)
+
+        if brewery.topBeers.items.count > 0 {
+            topBeerTitleLabel.text = "Top Beers"
+
+        } else  {
+            topBeerTitleLabel.text = ""
+        }
+        
         breweryHeaderVC.didMove(toParent: self)
         
         configureUI()
     }
     
     func configureUI() {
-        topBeerTitleLabel.text = "Top Beers"
         accent.translatesAutoresizingMaskIntoConstraints = false
         accent.backgroundColor = .systemOrange
         
@@ -116,7 +126,7 @@ class BreweryDetailViewController: UIViewController {
             breweryHeaderVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             breweryHeaderVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             breweryHeaderVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            breweryHeaderVC.view.heightAnchor.constraint(lessThanOrEqualToConstant: 200),
+            breweryHeaderVC.view.heightAnchor.constraint(lessThanOrEqualToConstant: 150),
             
             topBeerTitleLabel.topAnchor.constraint(equalTo: breweryHeaderVC.view.bottomAnchor, constant: 5),
             topBeerTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -151,16 +161,11 @@ extension BreweryDetailViewController : UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BeerListCell.reuseID, for: indexPath) as! BeerListCell
         let beer = self.beers[indexPath.row]
         
-        
         cell.backgroundColor = .secondarySystemBackground
         cell.layer.cornerRadius = 8
         cell.beerImage.downloadImage(fromURL: beer.beer.beerLabel)
         cell.beerTitleLabel.text = beer.beer.beerName
         cell.beerTypeLabel.text = beer.beer.beerStyle
-        
-        if beer.beer.beerAbv > 0.0 {
-            cell.beerABVLabel.text = "ABV: \(String(beer.beer.beerAbv))"
-        }
         
         return cell
     }
@@ -172,8 +177,4 @@ extension BreweryDetailViewController : UICollectionViewDelegate, UICollectionVi
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
     }
-
-    
-    
-    
 }

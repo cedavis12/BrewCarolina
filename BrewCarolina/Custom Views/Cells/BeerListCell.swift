@@ -15,7 +15,6 @@ class BeerListCell: UICollectionViewCell {
     let beerImage = BCImageView(frame: .zero)
     let beerTitleLabel = BCHeadlineLabel()
     let beerTypeLabel = BCCalloutLabel()
-    let beerABVLabel = BCCalloutLabel()
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +26,7 @@ class BeerListCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubviews(beerImage, beerTitleLabel, beerTypeLabel, beerABVLabel)
+        addSubviews(beerImage, beerTitleLabel, beerTypeLabel)
         
         beerTitleLabel.numberOfLines = 0
         
@@ -38,8 +37,8 @@ class BeerListCell: UICollectionViewCell {
             
             beerImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             beerImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            beerImage.heightAnchor.constraint(equalToConstant: 90),
-            beerImage.widthAnchor.constraint(equalToConstant: 90),
+            beerImage.heightAnchor.constraint(equalToConstant: 75),
+            beerImage.widthAnchor.constraint(equalToConstant: 75),
             
             beerTitleLabel.centerYAnchor.constraint(equalTo: beerImage.centerYAnchor, constant: -20),
             beerTitleLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
@@ -50,12 +49,6 @@ class BeerListCell: UICollectionViewCell {
             beerTypeLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
             beerTypeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
             beerTypeLabel.heightAnchor.constraint(equalToConstant: 18),
-            
-            beerABVLabel.topAnchor.constraint(equalTo: beerTypeLabel.bottomAnchor, constant: padding),
-            beerABVLabel.leadingAnchor.constraint(equalTo: beerImage.trailingAnchor, constant: imagePadding),
-            beerABVLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
-            beerABVLabel.heightAnchor.constraint(equalToConstant: 18),
-        
         ])
     }
 }

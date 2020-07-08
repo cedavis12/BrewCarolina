@@ -13,21 +13,22 @@ class BCTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor = .systemOrange
-        viewControllers = [createNearbyBrewNC(), createMapNC(), createSearchVC()]
+        viewControllers = [createMapNC(), createExploreVC(), createSearchVC()]
     }
     
-    func createNearbyBrewNC() -> UINavigationController {
-        let nearbyBrewVC = NearbyViewController()
-        nearbyBrewVC.tabBarItem = UITabBarItem(title: "Nearby", image: UIImage(systemName: "location"), tag: 0)
-        return UINavigationController(rootViewController: nearbyBrewVC)
-    }
-
     func createMapNC() -> UINavigationController {
            let mapVC = MapViewController()
-           mapVC.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 1)
+           mapVC.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 0)
            return UINavigationController(rootViewController: mapVC)
        }
     
+
+    func createExploreVC() -> UINavigationController {
+        let exploreVC = ExploreViewController()
+        exploreVC.tabBarItem = UITabBarItem(title: "Explore", image: UIImage(systemName: "shuffle"), tag: 1)
+        return UINavigationController(rootViewController: exploreVC)
+    }
+
     func createSearchVC() -> UINavigationController {
         let searchVC = SearchViewController()
         searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)

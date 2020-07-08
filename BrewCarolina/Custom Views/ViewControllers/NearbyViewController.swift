@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NearbyViewController: UIViewController {
     
@@ -14,18 +15,32 @@ class NearbyViewController: UIViewController {
     let subTitleLabel = UILabel()
     
     var venues: [Venues] = []
+    var filteredVenues: [Venues] = []
     var distance: Int = 25
     let items = ["25 miles", "50 miles", "100 miles"]
     
     var segmentControl: UISegmentedControl!
     var collectionView: UICollectionView!
+    var userLat: Double!
+    var userLong: Double!
+    
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavBar(withTitle: "Nearby")
+        
+        configureLocationManager()
         getVenues()
         configureCollectionView()
         configureUI()
+    }
+    
+    func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     func getVenues() {
@@ -40,8 +55,8 @@ class NearbyViewController: UIViewController {
                     self.view.bringSubviewToFront(self.collectionView)
                 }
             case .failure(let errorMessage):
-               DispatchQueue.main.async {
-                let alert = UIAlertController(title: "Something went wrong", message: errorMessage.rawValue, preferredStyle: .alert)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Something went wrong", message: errorMessage.rawValue, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                         NSLog("The \"OK\" alert occured.")
                     }))
@@ -68,7 +83,6 @@ class NearbyViewController: UIViewController {
         segmentControl.selectedSegmentIndex = 0
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     
     func configureUI() {
         configureSegmentedControl()
@@ -129,9 +143,13 @@ class NearbyViewController: UIViewController {
             break
         }
     }
+    
+    func grabBreweries(withinDistance distance: Int) {
+        
+    }
 }
 
-// CollectionView Delegates and Datasource
+// MARK: CollectionView Delegate and Datasource
 extension NearbyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -142,6 +160,7 @@ extension NearbyViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreweryListCell.reuseID, for: indexPath) as! BreweryListCell
         let brewery = self.venues[indexPath.row]
         cell.breweryTitleLabel.text = brewery.name
@@ -150,5 +169,48 @@ extension NearbyViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.backgroundColor = .secondarySystemBackground
         cell.layer.cornerRadius = 8
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let brewery = self.venues[indexPath.row]
+        
+        let breweryDetailVC = BreweryDetailViewController(breweryName: brewery.name, venueId: brewery.id)
+        navigationController?.pushViewController(breweryDetailVC, animated: true)
+    }
+}
+
+// MARK: CLLocationManagerDelegate
+extension NearbyViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let userLocation = locations.first {
+            userLat = userLocation.coordinate.latitude
+            userLong = userLocation.coordinate.longitude
+        }
+        
+        guard let lat = userLat else { return }
+        guard let long = userLong else { return }
+        
+        let userCoordinate = CLLocation(latitude: lat, longitude: long)
+        let columbia = CLLocation(latitude: 34.852619, longitude: -82.394012)
+
+        let distanceInMeters = userCoordinate.distance(from: columbia)
+        
+        print(distanceInMeters)
+        print("Distance in miles: \(distanceInMeters / 1609)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if(status == CLAuthorizationStatus.denied) {
+            let alert = UIAlertController(title: "Background Location Access Disabled", message: "Please enable location services to find nearby Upstate breweries.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let alert = UIAlertController(title: "Something went wrong", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
+        self.present(alert, animated: true, completion: nil)
     }
 }

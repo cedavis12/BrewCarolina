@@ -14,13 +14,14 @@
 		8342A1CE249FFB8E0027FB53 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8342A1CD249FFB8E0027FB53 /* UIView+Ext.swift */; };
 		83460FAA24ACFAD300C26D52 /* BreweryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83460FA924ACFAD300C26D52 /* BreweryDetailViewController.swift */; };
 		83460FAC24ACFB2B00C26D52 /* BeerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83460FAB24ACFB2B00C26D52 /* BeerListCell.swift */; };
-		83460FAE24AD003600C26D52 /* BeerHeaderInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83460FAD24AD003600C26D52 /* BeerHeaderInfoVC.swift */; };
 		83460FB324AD03F000C26D52 /* BreweryHeaderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83460FB224AD03F000C26D52 /* BreweryHeaderInfoViewController.swift */; };
 		83460FB524AD071100C26D52 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83460FB424AD071100C26D52 /* Constants.swift */; };
+		835C959024B4F7200060D846 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C958F24B4F7200060D846 /* ExploreViewController.swift */; };
 		8372C37E249E818500AF92D3 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8372C37D249E818500AF92D3 /* UIViewController+Ext.swift */; };
 		8373A9A324AE15D10083C1EA /* NetworkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8373A9A224AE15D10083C1EA /* NetworkData.swift */; };
 		837612D624AEB5F500CCE47D /* BCTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837612D524AEB5F500CCE47D /* BCTitleLabel.swift */; };
 		837612D824AEB94A00CCE47D /* BCTitle3Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837612D724AEB94A00CCE47D /* BCTitle3Label.swift */; };
+		83799AC024B51F66008E984B /* BCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83799ABF24B51F66008E984B /* BCButton.swift */; };
 		838EFC7E249E6B1E00845A04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFC7D249E6B1E00845A04 /* AppDelegate.swift */; };
 		838EFC80249E6B1E00845A04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFC7F249E6B1E00845A04 /* SceneDelegate.swift */; };
 		838EFC87249E6B2400845A04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838EFC86249E6B2400845A04 /* Assets.xcassets */; };
@@ -29,9 +30,12 @@
 		838EFCB3249E713B00845A04 /* BCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB2249E713B00845A04 /* BCTabBarController.swift */; };
 		838EFCB6249E71D000845A04 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB5249E71D000845A04 /* SearchViewController.swift */; };
 		839A444E24A190E0008849F7 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A444D24A190E0008849F7 /* UIHelper.swift */; };
+		83A4DDDC24B560DB0014D985 /* DataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4DDDB24B560DB0014D985 /* DataLoadingViewController.swift */; };
 		83ABF75124B004D300DC2DD5 /* BCImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABF75024B004D300DC2DD5 /* BCImageView.swift */; };
 		83ABF75324B1650200DC2DD5 /* BeerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */; };
 		83B96710249FF704007416B1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9670F249FF704007416B1 /* MapViewController.swift */; };
+		83C1520F24B2BD2E00C2D610 /* Formatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1520E24B2BD2E00C2D610 /* Formatter+Ext.swift */; };
+		83C1521124B2BD3E00C2D610 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1521024B2BD3E00C2D610 /* Int+Ext.swift */; };
 		83E5CE7024A2D6D100FDC127 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,14 +47,15 @@
 		8342A1CD249FFB8E0027FB53 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		83460FA924ACFAD300C26D52 /* BreweryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryDetailViewController.swift; sourceTree = "<group>"; };
 		83460FAB24ACFB2B00C26D52 /* BeerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListCell.swift; sourceTree = "<group>"; };
-		83460FAD24AD003600C26D52 /* BeerHeaderInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerHeaderInfoVC.swift; sourceTree = "<group>"; };
 		83460FB224AD03F000C26D52 /* BreweryHeaderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryHeaderInfoViewController.swift; sourceTree = "<group>"; };
 		83460FB424AD071100C26D52 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		835C958F24B4F7200060D846 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		8372C37D249E818500AF92D3 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		8373A9A224AE15D10083C1EA /* NetworkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkData.swift; sourceTree = "<group>"; };
 		837612D524AEB5F500CCE47D /* BCTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCTitleLabel.swift; sourceTree = "<group>"; };
 		837612D724AEB94A00CCE47D /* BCTitle3Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCTitle3Label.swift; sourceTree = "<group>"; };
-		838EFC7A249E6B1E00845A04 /* Brew Carolina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brew Carolina.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83799ABF24B51F66008E984B /* BCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCButton.swift; sourceTree = "<group>"; };
+		838EFC7A249E6B1E00845A04 /* Upstate Brew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Upstate Brew.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838EFC7D249E6B1E00845A04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838EFC7F249E6B1E00845A04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		838EFC86249E6B2400845A04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,9 +65,12 @@
 		838EFCB2249E713B00845A04 /* BCTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCTabBarController.swift; sourceTree = "<group>"; };
 		838EFCB5249E71D000845A04 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		839A444D24A190E0008849F7 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		83A4DDDB24B560DB0014D985 /* DataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingViewController.swift; sourceTree = "<group>"; };
 		83ABF75024B004D300DC2DD5 /* BCImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCImageView.swift; sourceTree = "<group>"; };
 		83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailViewController.swift; sourceTree = "<group>"; };
 		83B9670F249FF704007416B1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		83C1520E24B2BD2E00C2D610 /* Formatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Ext.swift"; sourceTree = "<group>"; };
+		83C1521024B2BD3E00C2D610 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,9 +116,9 @@
 		83460FB124AD02CA00C26D52 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				83460FAD24AD003600C26D52 /* BeerHeaderInfoVC.swift */,
+				838EFCAD249E6FC100845A04 /* NearbyViewController.swift */,
 				83460FB224AD03F000C26D52 /* BreweryHeaderInfoViewController.swift */,
-				83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */,
+				83A4DDDB24B560DB0014D985 /* DataLoadingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -121,8 +129,18 @@
 				8372C37D249E818500AF92D3 /* UIViewController+Ext.swift */,
 				8342A1CD249FFB8E0027FB53 /* UIView+Ext.swift */,
 				83E5CE6F24A2D6D100FDC127 /* String+Ext.swift */,
+				83C1520E24B2BD2E00C2D610 /* Formatter+Ext.swift */,
+				83C1521024B2BD3E00C2D610 /* Int+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		83799AC124B5212B008E984B /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				83799ABF24B51F66008E984B /* BCButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		838EFC71249E6B1E00845A04 = {
@@ -136,7 +154,7 @@
 		838EFC7B249E6B1E00845A04 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				838EFC7A249E6B1E00845A04 /* Brew Carolina.app */,
+				838EFC7A249E6B1E00845A04 /* Upstate Brew.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,21 +171,22 @@
 				832F2E3124A182DF0027792D /* Managers */,
 				839A444C24A190C2008849F7 /* Utilities */,
 				838EFCB0249E6FD600845A04 /* Models */,
-				838EFCB1249E6FE900845A04 /* Views */,
-				838EFCAF249E6FC600845A04 /* Controllers */,
+				838EFCB1249E6FE900845A04 /* Custom Views */,
+				838EFCAF249E6FC600845A04 /* Screens */,
 			);
 			path = BrewCarolina;
 			sourceTree = "<group>";
 		};
-		838EFCAF249E6FC600845A04 /* Controllers */ = {
+		838EFCAF249E6FC600845A04 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				838EFCAD249E6FC100845A04 /* NearbyViewController.swift */,
+				83ABF75224B1650200DC2DD5 /* BeerDetailViewController.swift */,
 				838EFCB5249E71D000845A04 /* SearchViewController.swift */,
 				83B9670F249FF704007416B1 /* MapViewController.swift */,
 				83460FA924ACFAD300C26D52 /* BreweryDetailViewController.swift */,
+				835C958F24B4F7200060D846 /* ExploreViewController.swift */,
 			);
-			path = Controllers;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		838EFCB0249E6FD600845A04 /* Models */ = {
@@ -178,16 +197,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		838EFCB1249E6FE900845A04 /* Views */ = {
+		838EFCB1249E6FE900845A04 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				83799AC124B5212B008E984B /* Buttons */,
 				83ABF74F24B004B600DC2DD5 /* ImageViews */,
 				83460FB124AD02CA00C26D52 /* ViewControllers */,
 				832F2E3924A1896F0027792D /* Labels */,
 				838EFCB4249E714000845A04 /* TabBarController */,
 				832F2E3624A187E80027792D /* Cells */,
 			);
-			path = Views;
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		838EFCB4249E714000845A04 /* TabBarController */ = {
@@ -234,7 +254,7 @@
 			packageProductDependencies = (
 			);
 			productName = BrewCarolina;
-			productReference = 838EFC7A249E6B1E00845A04 /* Brew Carolina.app */;
+			productReference = 838EFC7A249E6B1E00845A04 /* Upstate Brew.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -301,11 +321,15 @@
 				83460FB324AD03F000C26D52 /* BreweryHeaderInfoViewController.swift in Sources */,
 				83460FAC24ACFB2B00C26D52 /* BeerListCell.swift in Sources */,
 				83460FB524AD071100C26D52 /* Constants.swift in Sources */,
+				835C959024B4F7200060D846 /* ExploreViewController.swift in Sources */,
+				83C1521124B2BD3E00C2D610 /* Int+Ext.swift in Sources */,
 				83460FAA24ACFAD300C26D52 /* BreweryDetailViewController.swift in Sources */,
 				832F2E3524A187E30027792D /* BreweryListCell.swift in Sources */,
 				838EFCAE249E6FC100845A04 /* NearbyViewController.swift in Sources */,
 				8373A9A324AE15D10083C1EA /* NetworkData.swift in Sources */,
 				832F2E3324A183010027792D /* NetworkManager.swift in Sources */,
+				83A4DDDC24B560DB0014D985 /* DataLoadingViewController.swift in Sources */,
+				83799AC024B51F66008E984B /* BCButton.swift in Sources */,
 				839A444E24A190E0008849F7 /* UIHelper.swift in Sources */,
 				83B96710249FF704007416B1 /* MapViewController.swift in Sources */,
 				837612D624AEB5F500CCE47D /* BCTitleLabel.swift in Sources */,
@@ -313,7 +337,7 @@
 				8342A1CE249FFB8E0027FB53 /* UIView+Ext.swift in Sources */,
 				838EFC7E249E6B1E00845A04 /* AppDelegate.swift in Sources */,
 				838EFC80249E6B1E00845A04 /* SceneDelegate.swift in Sources */,
-				83460FAE24AD003600C26D52 /* BeerHeaderInfoVC.swift in Sources */,
+				83C1520F24B2BD2E00C2D610 /* Formatter+Ext.swift in Sources */,
 				8372C37E249E818500AF92D3 /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,8 +483,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = "Brew Carolina";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.UpstateBrew;
+				PRODUCT_NAME = "Upstate Brew";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -477,8 +501,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.BrewCarolina;
-				PRODUCT_NAME = "Brew Carolina";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.UpstateBrew;
+				PRODUCT_NAME = "Upstate Brew";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

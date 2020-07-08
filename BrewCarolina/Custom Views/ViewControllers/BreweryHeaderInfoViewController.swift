@@ -50,8 +50,7 @@ class BreweryHeaderInfoViewController: UIViewController {
         let imagePadding: CGFloat = 8
         
         NSLayoutConstraint.activate([
-            
-            breweryImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            breweryImage.topAnchor.constraint(equalTo: view.topAnchor),
             breweryImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             breweryImage.heightAnchor.constraint(equalToConstant: 100),
             breweryImage.widthAnchor.constraint(equalToConstant: 100),
@@ -64,8 +63,7 @@ class BreweryHeaderInfoViewController: UIViewController {
             locationLabel.topAnchor.constraint(equalTo: breweryTitleLabel.bottomAnchor, constant: padding),
             locationLabel.leadingAnchor.constraint(equalTo: breweryImage.trailingAnchor, constant: imagePadding),
             locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            locationLabel.heightAnchor.constraint(equalToConstant: 50),
-            
+            locationLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 50),
         ])
     }
 }

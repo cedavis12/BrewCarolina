@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class SearchViewController: UIViewController{
+class SearchViewController: DataLoadingViewController {
     
     enum Section { case main }
     
@@ -29,8 +29,10 @@ class SearchViewController: UIViewController{
     }
     
     func getVenues() {
+        showLoadingView()
         NetworkManager.shared.getFSVenues { [weak self] (result) in
             guard let self = self else { return }
+            self.dismissLoadingView()
             
             switch result {
             case .success(let venues):
@@ -54,7 +56,7 @@ class SearchViewController: UIViewController{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreweryListCell.reuseID, for: indexPath) as! BreweryListCell
             cell.backgroundColor = .systemGray5
             cell.breweryTitleLabel.text = venue.name
-            cell.breweryDistanceLabel.text = venue.id
+            cell.breweryDistanceLabel.text = "\(venue.location.address ?? "")"
             cell.breweryLocationLabel.text = "\(venue.location.city ?? ""), \(venue.location.state ?? "")"
             cell.backgroundColor = .secondarySystemBackground
             cell.layer.cornerRadius = 8
@@ -70,7 +72,6 @@ class SearchViewController: UIViewController{
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
-
     }
     
     func configureSearchController() {
@@ -92,16 +93,15 @@ class SearchViewController: UIViewController{
 
 // MARK: UICollectionViewDelegates
 extension SearchViewController: UICollectionViewDelegate {
-   
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredVenues : venues
         let brewery = activeArray[indexPath.item]
-
-        let breweryDetailVC = BreweryDetailViewController(breweryName: brewery.name, FSID: brewery.id)
+        
+        let breweryDetailVC = BreweryDetailViewController(breweryName: brewery.name, venueId: brewery.id)
         navigationController?.pushViewController(breweryDetailVC, animated: true)
     }
 }
-
 
 // MARK: UISearchResultsUpdater
 extension SearchViewController: UISearchResultsUpdating {
