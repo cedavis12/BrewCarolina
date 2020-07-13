@@ -1,10 +1,12 @@
-# Upstate Brew <a href="https://apps.apple.com/us/app/rgb-matcher/id1515839604?ls=1"><img src="https://cedavis12.github.io/rgbmatcher/img/app-store-badge.svg"/></a>
+# Upstate Brew 
+<a href="https://apps.apple.com/us/app/rgb-matcher/id1515839604?ls=1"><img src="https://cedavis12.github.io/rgbmatcher/img/app-store-badge.svg"/></a>
 
 Discover the breweries and cideries of Upstate South Carolina
 
 <img src="https://cedavis12.github.io/upstatebrew/img/composite.png" alt="app store image"/>
 
 ## Features
+Upstate Brew has you covered with dynamic data powered by FourSquare and Untappd.
 
 -Use the Explore page to randomly find your next brewery visit.
 
