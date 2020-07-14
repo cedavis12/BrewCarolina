@@ -1,5 +1,5 @@
 # Upstate Brew 
-<a href="https://apps.apple.com/us/app/rgb-matcher/id1515839604?ls=1"><img src="https://cedavis12.github.io/rgbmatcher/img/app-store-badge.svg"/></a>
+<a href="https://apps.apple.com/us/app/upstate-brew/id1522915829"><img src="https://cedavis12.github.io/rgbmatcher/img/app-store-badge.svg"/></a>
 
 Discover the breweries and cideries of Upstate South Carolina
 
