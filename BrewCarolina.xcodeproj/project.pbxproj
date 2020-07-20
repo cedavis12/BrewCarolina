@@ -26,7 +26,6 @@
 		838EFC80249E6B1E00845A04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFC7F249E6B1E00845A04 /* SceneDelegate.swift */; };
 		838EFC87249E6B2400845A04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838EFC86249E6B2400845A04 /* Assets.xcassets */; };
 		838EFC8A249E6B2400845A04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838EFC88249E6B2400845A04 /* LaunchScreen.storyboard */; };
-		838EFCAE249E6FC100845A04 /* NearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCAD249E6FC100845A04 /* NearbyViewController.swift */; };
 		838EFCB3249E713B00845A04 /* BCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB2249E713B00845A04 /* BCTabBarController.swift */; };
 		838EFCB6249E71D000845A04 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EFCB5249E71D000845A04 /* SearchViewController.swift */; };
 		839A444E24A190E0008849F7 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A444D24A190E0008849F7 /* UIHelper.swift */; };
@@ -61,7 +60,6 @@
 		838EFC86249E6B2400845A04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		838EFC89249E6B2400845A04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		838EFC8B249E6B2400845A04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		838EFCAD249E6FC100845A04 /* NearbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyViewController.swift; sourceTree = "<group>"; };
 		838EFCB2249E713B00845A04 /* BCTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCTabBarController.swift; sourceTree = "<group>"; };
 		838EFCB5249E71D000845A04 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		839A444D24A190E0008849F7 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 		83460FB124AD02CA00C26D52 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				838EFCAD249E6FC100845A04 /* NearbyViewController.swift */,
 				83460FB224AD03F000C26D52 /* BreweryHeaderInfoViewController.swift */,
 				83A4DDDB24B560DB0014D985 /* DataLoadingViewController.swift */,
 			);
@@ -325,7 +322,6 @@
 				83C1521124B2BD3E00C2D610 /* Int+Ext.swift in Sources */,
 				83460FAA24ACFAD300C26D52 /* BreweryDetailViewController.swift in Sources */,
 				832F2E3524A187E30027792D /* BreweryListCell.swift in Sources */,
-				838EFCAE249E6FC100845A04 /* NearbyViewController.swift in Sources */,
 				8373A9A324AE15D10083C1EA /* NetworkData.swift in Sources */,
 				832F2E3324A183010027792D /* NetworkManager.swift in Sources */,
 				83A4DDDC24B560DB0014D985 /* DataLoadingViewController.swift in Sources */,
@@ -483,7 +479,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.UpstateBrew;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.courtneydavis.UpstateBrew;
 				PRODUCT_NAME = "Upstate Brew";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -501,7 +498,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.courtneydavis.UpstateBrew;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.courtneydavis.UpstateBrew;
 				PRODUCT_NAME = "Upstate Brew";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

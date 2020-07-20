@@ -63,7 +63,7 @@ class ExploreViewController:  DataLoadingViewController {
         view.addSubviews(breweryDetailVC.view, randomButton)
         breweryDetailVC.didMove(toParent: self)
         
-        randomButton.setTitle("Check out a random Upstate Brewery", for: .normal)
+        randomButton.setTitle("Check Out a Random Upstate Brewery", for: .normal)
         randomButton.addTarget(self, action: #selector(randomButtonTapped), for: .touchUpInside)
         
         layoutUI()

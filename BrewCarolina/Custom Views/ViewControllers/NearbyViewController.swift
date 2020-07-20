@@ -30,19 +30,11 @@ class NearbyViewController: UIViewController {
         super.viewDidLoad()
         self.configureNavBar(withTitle: "Nearby")
         
-        configureLocationManager()
         getVenues()
         configureCollectionView()
         configureUI()
     }
-    
-    func configureLocationManager() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
+        
     func getVenues() {
         NetworkManager.shared.getFSVenues { [weak self] (result) in
             guard let self = self else { return }

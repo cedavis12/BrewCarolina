@@ -95,6 +95,7 @@ class BeerDetailViewController: UIViewController {
         beerDescription.text = beer.beer.beerDescription
         beerDescription.textAlignment = .center
         beerDescription.textColor = .secondaryLabel
+        beerDescriptionLabel.lineBreakMode = .byTruncatingTail
                 
         if beer.beer.beerAbv > 0.0 {
             abvTitleLabel.text = "\(beer.beer.beerAbv) \n ABV"
@@ -124,6 +125,10 @@ class BeerDetailViewController: UIViewController {
     func layoutUI() {
         let padding: CGFloat = 8
                
+        if DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed {
+            beerDescription.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
             beerImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             beerImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -140,7 +145,7 @@ class BeerDetailViewController: UIViewController {
             labelStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             labelStack.heightAnchor.constraint(equalToConstant: 50),
             
-            beerDescriptionLabel.topAnchor.constraint(equalTo: labelStack.bottomAnchor, constant: 25),
+            beerDescriptionLabel.topAnchor.constraint(equalTo: labelStack.bottomAnchor, constant: 30),
             beerDescriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             beerDescriptionLabel.heightAnchor.constraint(equalToConstant: 30),
             
@@ -149,7 +154,6 @@ class BeerDetailViewController: UIViewController {
             accent.trailingAnchor.constraint(equalTo: beerDescriptionLabel.trailingAnchor),
             accent.heightAnchor.constraint(equalToConstant: 5),
 
-            
             beerDescription.topAnchor.constraint(equalTo: accent.bottomAnchor, constant: padding),
             beerDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             beerDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
